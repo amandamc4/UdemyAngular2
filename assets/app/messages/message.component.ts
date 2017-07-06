@@ -27,4 +27,6 @@ export class MessageComponent {
         //alert ('Hi');
         this.editClicked.emit('A new value');
     }
+
+    color = 'red';
 }
