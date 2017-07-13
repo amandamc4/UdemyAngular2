@@ -6,7 +6,7 @@ import { Message } from "./message.model";
     selector: 'app-message-input',
     templateUrl: './message-input.component.html',
     //Dependency Injection
-    providers: [MessageService]
+    //providers: [MessageService] - one per component
 })
 
 export class MessageInputComponent {
