@@ -28,6 +28,7 @@ export class MessageInputComponent implements OnInit{
         else{
             //Create
             const message = new Message(form.value.content, 'Amanda');
+            console.log(message);
             this.messageService.addMessage(message)
             .subscribe(
                 data => console.log(data),
