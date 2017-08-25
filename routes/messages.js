@@ -1,7 +1,36 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
 var Message = require('../models/message');
+
+router.get('/', function(req, res, next){
+    Message.find()
+        .exec(function(err, messages){
+            if(err){
+                return res.status(500).json({
+                    title: 'An error occured',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+        });
+});
+
+router.use('/', function(req, res, next){
+    jwt.verify(req.query.token, 'secret', function(err, decoded){
+        if(err){
+            return res.status(401).json({
+                title: 'Not authenticated',
+                error: err
+            });
+        }
+        next();
+    })
+});
 
 router.post('/', function (req, res, next) {    
   var message = new Message({
@@ -19,22 +48,6 @@ router.post('/', function (req, res, next) {
           obj: result
       });
   });
-});
-
-router.get('/', function(req, res, next){
-    Message.find()
-        .exec(function(err, messages){
-            if(err){
-                return res.status(500).json({
-                    title: 'An error occured',
-                    error: err
-                });
-            }
-            res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
-        });
 });
 
 router.patch('/:id', function(req, res, next){
