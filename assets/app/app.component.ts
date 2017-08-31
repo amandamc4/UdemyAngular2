@@ -4,7 +4,7 @@ import { MessageService } from './messages/message.service';
 @Component({
     selector: 'my-app',
     templateUrl: './app.component.html',
-    providers: [MessageService] // single instance
+    //providers: [MessageService] // single instance
 })
 export class AppComponent {   
 }
